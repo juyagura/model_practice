@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
 
     # Your Ruby goes here.
 
-    # @most_recent_movie_for_second_actor = ???
+    @most_recent_movie_for_second_actor = Actor.second.movies.order("year desc").first.title
   end
 
   def question_2
