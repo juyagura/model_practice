@@ -20,8 +20,16 @@ class QuestionsController < ApplicationController
     # Which director has the most movies on the list?
 
     # Your Ruby goes here.
-
-    # @director_with_the_most_movies = ???
+    maximum_number_of_movies = 0
+    director_id_with_most_movies = 0
+    Director.all.each do |the_director|
+      number_of_movies = the_director.movies.count
+      if number_of_movies > maximum_number_of_movies
+        maximum_number_of_movies = number_of_movies
+        director_id_with_most_movies = the_director.id
+      end
+    end
+    @director_with_the_most_movies = Director.find(director_id_with_most_movies).name
   end
 
   def question_4
@@ -29,8 +37,16 @@ class QuestionsController < ApplicationController
     # (If there's a tie, any one of them is fine)
 
     # Your Ruby goes here.
-
-    # @actor_with_the_most_movies = ???
+    maximum_number_of_movies = 0
+    actor_id_with_most_movies = 0
+    Actor.all.each do |the_actor|
+      number_of_movies = the_actor.movies.count
+      if number_of_movies > maximum_number_of_movies
+        maximum_number_of_movies = number_of_movies
+        actor_id_with_most_movies = the_actor.id
+      end
+    end
+    @actor_with_the_most_movies = Actor.find(actor_id_with_most_movies).name
   end
 
   def question_5
