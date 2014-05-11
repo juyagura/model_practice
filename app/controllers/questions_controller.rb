@@ -12,7 +12,8 @@ class QuestionsController < ApplicationController
 
     # Your Ruby goes here.
 
-    # @director_of_longest_movie = ???
+    @director_of_longest_movie = Movie.order("duration desc").first.director.name
+    @duration_of_longest_movie = Movie.order("duration desc").first.duration
   end
 
   def question_3
