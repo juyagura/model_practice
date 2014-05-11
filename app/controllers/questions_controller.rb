@@ -56,9 +56,21 @@ class QuestionsController < ApplicationController
     # (If there's a tie, any pair of them is fine)
 
     # Your Ruby goes here.
-
-    # @actor = ???
-    # @director = ???
-    # @movies_together = ???
+    maximum_number_of_movies = 0
+    actor_id_of_the_pair = 0
+    director_id_of_the_pair = 0
+    Actor.all.each do |the_actor|
+      Director.all.each do |the_director|
+        number_of_movies = the_actor.movies.where({ :director_id => the_director.id }).count
+        if number_of_movies > maximum_number_of_movies
+          maximum_number_of_movies = number_of_movies
+          actor_id_of_the_pair = the_actor.id
+          director_id_of_the_pair = the_director.id
+        end
+      end
+    end
+    @actor = Actor.find(actor_id_of_the_pair)
+    @director = Director.find(director_id_of_the_pair)
+    @movies_together = @actor.movies.where({ :director_id => @director.id })
   end
 end
